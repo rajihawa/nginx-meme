@@ -1,0 +1,18 @@
+---
+kind: pipeline
+type: kubernetes
+name: nginx-meme
+
+steps:
+  - name: build
+    image: docker:dind
+    volumes:
+      - name: dockersock
+        path: /var/run
+    commands:
+      - docker build -t meme .
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run
